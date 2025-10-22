@@ -1,0 +1,219 @@
+:root {
+  --bg: #0b0f14;
+  --panel: #141a22;
+  --muted: #8aa0b7;
+  --accent: #5fb3ff;
+  --ok: #28c76f;
+  --warn: #ff9f43;
+  --bad: #ea5455;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    "Noto Sans", ui-sans-serif, sans-serif;
+  background: var(--bg);
+  color: #e8eef5;
+}
+.wrap {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 12px;
+}
+
+/* Board căn giữa */
+.board {
+  position: relative;
+  display: block;
+  background: #0f141b;
+  border: 1px solid #233041;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  margin: 0 auto;
+  width: 100%;
+}
+.board-inner {
+  position: relative;
+  width: max-content;
+  height: max-content;
+  margin: 0 auto;
+  touch-action: none;
+}
+.zoom-layer {
+  position: relative;
+  transform-origin: 0 0;
+  touch-action: none;
+  cursor: grab;
+}
+.zoom-layer.grabbing {
+  cursor: grabbing;
+}
+
+.board img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Hotspot (điểm nếu dùng x_pct, y_pct) */
+.hotspot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 2px solid #fff;
+  background: var(--accent);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+.hotspot.ok {
+  background: var(--ok);
+}
+.hotspot.warn {
+  background: var(--warn);
+}
+.hotspot.err {
+  background: var(--bad);
+}
+.hotspot:focus {
+  outline: 3px solid rgba(255, 255, 255, 0.35);
+}
+
+/* Popover */
+.popover {
+  position: absolute;
+  min-width: 280px;
+  max-width: 380px;
+  background: var(--panel);
+  border: 1px solid #213041;
+  border-radius: 12px;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.55);
+  padding: 12px;
+  z-index: 30;
+}
+.popover h3 {
+  margin: 0.2rem 0 0.4rem;
+  font-size: 16px;
+}
+.kv {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 6px;
+  font-size: 13px;
+  color: #cdd8e3;
+}
+.kv div {
+  padding: 2px 0;
+}
+.tag {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  background: #1d2a39;
+  border: 1px solid #243548;
+  color: #b7c6d8;
+  font-size: 11.5px;
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0 14px;
+  flex-wrap: wrap;
+}
+.toolbar .btn {
+  background: #172231;
+  border: 1px solid #223141;
+  color: #d8e6f6;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.toolbar .btn:active {
+  transform: translateY(1px);
+}
+.legend {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #121922;
+  border: 1px solid #223141;
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+}
+.muted {
+  color: var(--muted);
+}
+a {
+  color: #b8dcff;
+}
+
+/* Overlay vùng – ẨN mặc định, chỉ hiện khi hover/focus */
+.overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.zone {
+  fill: rgba(95, 179, 255, 0.01);
+  stroke: transparent;
+  stroke-width: 0.6;
+  pointer-events: auto;
+  transition: fill 0.15s ease, stroke 0.15s ease, stroke-width 0.15s ease;
+}
+.zone:hover,
+.zone:focus {
+  fill: rgba(95, 179, 255, 0.22);
+  stroke: #5fb3ff;
+  stroke-width: 1;
+}
+.zone.ok:hover,
+.zone.ok:focus {
+  fill: rgba(40, 199, 111, 0.22);
+  stroke: #28c76f;
+}
+.zone.warn:hover,
+.zone.warn:focus {
+  fill: rgba(255, 159, 67, 0.22);
+  stroke: #ff9f43;
+}
+.zone.err:hover,
+.zone.err:focus {
+  fill: rgba(234, 84, 85, 0.22);
+  stroke: #ea5455;
+}
+.zone:focus {
+  outline: 2px solid #fff;
+}
+
+/* Hộp gợi ý toạ độ */
+.coord-hint {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  padding: 8px 10px;
+  background: #111722;
+  border: 1px solid #223141;
+  border-radius: 8px;
+  font-size: 12px;
+  color: #c8d7ea;
+}
